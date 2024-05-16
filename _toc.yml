@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
-- file: cf_conventions_101
+- file: netcdf_101
+- file: cf_101
+- file: cf_grid
+- file: cf_dsg
