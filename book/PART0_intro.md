@@ -2,9 +2,9 @@
 
 The objective of the course is "How to make publishable netCDF data".
 
-NetCDF is the most widely used scientific data format in the earth system science (ESS). This course targets at scientists who want to share their research data with the scientific community, and aims at providing a systematic guide on creating publishable netCDF data.
+NetCDF is one of the most widely used scientific data formats in the earth system science (ESS). This course targets at scientists who want to share their research data in an interoperable way, and aims at providing a systematic guide on creating publishable netCDF data.
 
-The CF Conventions have a wide range of regulations and recommendations on netCDF data structure and metadata formatting. This course aims at making the adoptation of the metadata standard easier for users and focuses on the highly needed aspects which we also see as the core aspect; It is not covering every aspect of the CF Conventions. For advanced users, the CF Conventions documentation provides a more comprehensive reference. But for beginners, following this book should be sufficient for making own datasets complied with the CF Conventions beyond a basic but clear understanding of netCDF content structure.
+The CF Conventions have a wide range of regulations and recommendations on netCDF data structure and metadata formatting. This course aims at making the adoptation of the metadata standard easier for users and focuses on the highly needed aspects which we also see as the core aspect; It is not covering every aspect of the CF Conventions. For advanced users, the CF Conventions documentation provides a more comprehensive reference. But for beginners, following this tutorial should be sufficient for producing netCDF datasets conforming to the CF Conventions.
 
 In this course we will learn:
 
