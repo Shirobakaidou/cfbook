@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter-2: An Introduction to the CF Conventions &#8212; Create Publishable NetCDF Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/PART2_Introduction_CF_Conventions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter-3: Create netCDF for gridded data with Xarray" href="PART3_Grid_netCDF_Xarray.html" />
+    <link rel="prev" title="Chapter-1: An Introduction to netCDF" href="PART1_Intro_netCDF.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="PART0_intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Create Publishable NetCDF Data - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Create Publishable NetCDF Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="PART0_intro.html">
+                    Welcome to the Course!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PART1_Intro_netCDF.html">Chapter-1: An Introduction to netCDF</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter-2: An Introduction to the CF Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PART3_Grid_netCDF_Xarray.html">Chapter-3: Create netCDF for gridded data with Xarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PART4_DSG_timeSeries.html">Chapter-4: Create netCDF for time series data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PART5_DSG_profile.html">Chapter-5: Create netCDF for profile Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PART6_DSG_trajectory.html">Chapter-6: Create netCDF for trajectory Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PART7_combined_DSG.html">Chapter-7: Create netCDF for compound data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbook/PART2_Introduction_CF_Conventions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/PART2_Introduction_CF_Conventions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter-2: An Introduction to the CF Conventions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-adopt-a-metadata-standard">Why should we adopt a metadata standard?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-attributes-in-netcdf">1. Standard Attributes in netCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-attributes">1.1. Variable Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-attributes">1.2. Global Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure-recommendations-for-diverse-data-types">2. File Structure Recommendations for Diverse Data Types</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-an-introduction-to-the-cf-conventions">
+<h1>Chapter-2: An Introduction to the CF Conventions<a class="headerlink" href="#chapter-2-an-introduction-to-the-cf-conventions" title="Link to this heading">#</a></h1>
+<section id="why-should-we-adopt-a-metadata-standard">
+<h2>Why should we adopt a metadata standard?<a class="headerlink" href="#why-should-we-adopt-a-metadata-standard" title="Link to this heading">#</a></h2>
+<p>In the earth system science (ESS) community, huge amount of data are generated, exchanged, and consumed. It is often a time consuming task for researchers to discover from an enormous pool of data the right dataset they want. Meanwhile, it is also challenging for data providers to bring their data products to users. To meet this challenge in today’s research ecosystem, it is a highly recommended practice to enrich and standardize metadata of research datasets. By doing this, you’re making your data more findable, interoperable, and reusable by other stakeholders in the community, thus contributing to the achievement of the FAIR principle of open science in a broader sense.</p>
+<p>A <strong>metadata standard</strong>, by definition, is a set of rules or guidelines that defines how metadata should be structured, described, and managed. It specifies the elements or attributes to be included, the semantics of those elements, and often the syntax or format in which the metadata should be encoded.</p>
+<p>The CF Conventions is becoming a widely adopted metadata standard for netCDF data format. It is the successor of the COARDS Conventions, and is characterised by its flexibility and campatibility with other metadata standards. Broadly speaking, the CF Conventions does two important things:</p>
+<ol class="arabic simple">
+<li><p>Providing standards for attributes: What kind of attributes should be included in netCDFs?</p></li>
+<li><p>Giving recommendations on data structure in netCDF for different types of data (e.g. grid data, discret points etc.)</p></li>
+</ol>
+</section>
+<section id="standard-attributes-in-netcdf">
+<h2>1. Standard Attributes in netCDF<a class="headerlink" href="#standard-attributes-in-netcdf" title="Link to this heading">#</a></h2>
+<p>According to the <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html">CF Conventions</a>(by the time of making this chapter, the most recent version of the CF Conventions is 1.11), some attributes are required while the others are optional. However, it is certainly recommended to enrich the attributes of each variable, as well as the entire dataset, as good as possible. Here, we will use the same <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/examples/tos_O1_2001-2002.nc">dataset</a> of sea surface temperature as an example like in the previous chapter.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xarray.Dataset {
+dimensions:
+	lon = 180 ;
+	bnds = 2 ;
+	lat = 170 ;
+	time = 24 ;
+
+variables:
+	float64 lon(lon) ;
+		lon:standard_name = longitude ;
+		lon:long_name = longitude ;
+		lon:units = degrees_east ;
+		lon:axis = X ;
+		lon:bounds = lon_bnds ;
+		lon:original_units = degrees_east ;
+	float64 lon_bnds(lon, bnds) ;
+	float64 lat(lat) ;
+		lat:standard_name = latitude ;
+		lat:long_name = latitude ;
+		lat:units = degrees_north ;
+		lat:axis = Y ;
+		lat:bounds = lat_bnds ;
+		lat:original_units = degrees_north ;
+	float64 lat_bnds(lat, bnds) ;
+	float64 time(time) ;
+		time:standard_name = time ;
+		time:long_name = time ;
+		time:units = days since 2001-1-1 ;
+		time:axis = T ;
+		time:calendar = 360_day ;
+		time:bounds = time_bnds ;
+		time:original_units = seconds since 2001-1-1 ;
+	float64 time_bnds(time, bnds) ;
+	float32 tos(time, lat, lon) ;
+		tos:standard_name = sea_surface_temperature ;
+		tos:long_name = Sea Surface Temperature ;
+		tos:units = K ;
+		tos:cell_methods = time: mean (interval: 30 minutes) ;
+		tos:_FillValue = 1.0000000200408773e+20 ;
+		tos:missing_value = 1.0000000200408773e+20 ;
+		tos:original_name = sosstsst ;
+		tos:original_units = degC ;
+		tos:history =  At   16:37:23 on 01/11/2005: CMOR altered the data in the following ways: added 2.73150E+02 to yield output units;  Cyclical dimension was output starting at a different lon; ;
+
+// global attributes:
+	:title = IPSL  model output prepared for IPCC Fourth Assessment SRES A2 experiment ;
+	:institution = IPSL (Institut Pierre Simon Laplace, Paris, France) ;
+	:source = IPSL-CM4_v1 (2003) : atmosphere : LMDZ (IPSL-CM4_IPCC, 96x71x19) ; ocean ORCA2 (ipsl_cm4_v1_8, 2x2L31); sea ice LIM (ipsl_cm4_v ;
+	:contact = Sebastien Denvil, sebastien.denvil@ipsl.jussieu.fr ;
+	:project_id = IPCC Fourth Assessment ;
+	:table_id = Table O1 (13 November 2004) ;
+	:experiment_id = SRES A2 experiment ;
+	:realization = 1 ;
+	:cmor_version = 0.9599999785423279 ;
+	:Conventions = CF-1.0 ;
+	:history = YYYY/MM/JJ: data generated; YYYY/MM/JJ+1 data transformed  At 16:37:23 on 01/11/2005, CMOR rewrote data to comply with CF standards and IPCC Fourth Assessment requirements ;
+	:references = Dufresne et al, Journal of Climate, 2015, vol XX, p 136 ;
+	:comment = Test drive ;
+}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="variable-attributes">
+<h3>1.1. Variable Attributes<a class="headerlink" href="#variable-attributes" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Required Attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">long_name</span></code>/<code class="docutils literal notranslate"><span class="pre">standard_name</span></code>: Define the meaning of the variable. The <code class="docutils literal notranslate"><span class="pre">long_name</span></code> can be given by dataset creators, whereas the <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> must be a controlled vocabulary as defined in the <a class="reference external" href="https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html">“CF Standard Name Table”</a>.</p>
+<ul>
+<li><p>E.g. in variable <code class="docutils literal notranslate"><span class="pre">tos</span></code>, the long name was defined as “Sea Surface Temperature`, while another formation of the name is allowed too, as long as it makes sense, such as “sea surface temperature” or “Temperature of Sea Surface”. However, the standard name must be strictly written as “sea_surface_temperature” just like given in the standard name table.</p></li>
+<li><p>Based on the Standard Name Table, the standard name for a longitude variable is always “longitude”, for a latitude variable is “latitude”, and for a time variable is “time”.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">units</span></code>: The unit of the variable, should be parsable by the <a class="reference external" href="https://www.unidata.ucar.edu/software/udunits/">UDUNITS library</a>. If a variable has a <code class="docutils literal notranslate"><span class="pre">standard_name</span></code>, its <code class="docutils literal notranslate"><span class="pre">units</span></code> can be looked up in the “CF Standard Name Table” too.</p>
+<ul>
+<li><p>E.g. As defined in the Standard Name Table, <code class="docutils literal notranslate"><span class="pre">degrees_north</span></code> is the unit for a latitude variable, and <code class="docutils literal notranslate"><span class="pre">degrees_east</span></code> for a longitude variable.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">units</span></code> of a time variable is supposed to be a string in the form of <code class="docutils literal notranslate"><span class="pre">[time-interval]</span> <span class="pre">since</span> <span class="pre">YYYY-MM-DD</span> <span class="pre">hh:mm:ss</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">seconds</span> <span class="pre">since</span> <span class="pre">2001-1-1</span></code> in the example. “seconds”, “minutes”, “hours”, and “days” are the most commonly used time intervals; “months” or “years” are not recommended because the interval length may vary.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">units</span></code> of sea surface temperature in the example is given in Kelvin (K), which is aligned with the recommendation by the <a class="reference external" href="https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html">“CF Standard Name Table”</a>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Important or Common Optional Attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_range</span></code>: Two numbers specifying the MIN and MAX valid values of a variable. Any values outside this range are treated as missing. Must not be defined if either <code class="docutils literal notranslate"><span class="pre">valid_min</span></code> or <code class="docutils literal notranslate"><span class="pre">valid_max</span></code> is defined.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_FillValue</span></code>: Indicating missing data. It should be scalar (only one value) and outside of the <code class="docutils literal notranslate"><span class="pre">valid_range</span></code>. <em>This attribute is not allowed for coordinate variables</em>.</p>
+<ul>
+<li><p>E.g. in variable <code class="docutils literal notranslate"><span class="pre">tos</span></code>, everywhere in the 3D field where no values exist, are filled with value <strong>1.e+20</strong></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_factor</span></code>/<code class="docutils literal notranslate"><span class="pre">add_offset</span></code>: Used for unpacking data for display.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[{unpackedData = scaleFactor * storedData + addOffset}\]</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">actual_range</span></code>: Must exactly equal to the MIN and MAX of the unpacked variable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis</span></code>: Identifies latitude, longitude, vertical or time axes. (<code class="docutils literal notranslate"><span class="pre">X</span></code> for longitude, <code class="docutils literal notranslate"><span class="pre">Y</span></code> for latitude, <code class="docutils literal notranslate"><span class="pre">Z</span></code> for vertical axis, <code class="docutils literal notranslate"><span class="pre">T</span></code> for time)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: <em>(This attribute exists only in data variables)</em> It is a list of auxiliary coordinate variables (and optionally coordinate variables) separated by a blank. There is no restriction on the order in which the variable names appear in the string.</p>
+<ul>
+<li><p>Though it’s not given in the example dataset, variable <code class="docutils literal notranslate"><span class="pre">tos</span></code> may contain a coordinate attribute like <code class="docutils literal notranslate"><span class="pre">tos:</span> <span class="pre">coordinates</span> <span class="pre">=</span> <span class="pre">lon_bnds</span> <span class="pre">lat_bnds</span> <span class="pre">time_bnds</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>If the data are gridded, the attribute <code class="docutils literal notranslate"><span class="pre">cell_methods</span></code> is valuable too:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cell_methods</span></code>: The method by which the cell values are calculated; it’s formed in a string of <code class="docutils literal notranslate"><span class="pre">name:method</span></code>.</p>
+<ul>
+<li><p>E.g. <code class="docutils literal notranslate"><span class="pre">tos:cell_methods</span> <span class="pre">=</span> <span class="pre">time:</span> <span class="pre">mean</span> <span class="pre">(interval:</span> <span class="pre">30</span> <span class="pre">minutes)</span></code> tells that the value of sea surface temperature in every cell is a temporal mean of 30 days (As noted before, the correct time interval should be 30 days).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example dataset, no attributes were provided to the boundary variables (<code class="docutils literal notranslate"><span class="pre">lon_bnds</span></code>, <code class="docutils literal notranslate"><span class="pre">lat_bnds</span></code>, <code class="docutils literal notranslate"><span class="pre">time_bnds</span></code>), that’s because boundary variables usually inherits attributes of their parent variables (<code class="docutils literal notranslate"><span class="pre">lon</span></code>, <code class="docutils literal notranslate"><span class="pre">lat</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>).</p>
+</div>
+</section>
+<section id="global-attributes">
+<h3>1.2. Global Attributes<a class="headerlink" href="#global-attributes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: short description about the content of the netCDF file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Conventions</span></code>: The name of the metadata standard applied to this dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">institution</span></code>: The name of the organization where the dataset is produced.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>: The used method for producing the original data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">references</span></code>: References that describe the data or the data production method, e.g. published article.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">history</span></code>: List of actions taken to modify the original data.</p></li>
+<li><p>If the data are discrete, the attribute <code class="docutils literal notranslate"><span class="pre">featureType</span></code> is REQUIRED; the attribute value should be one of these options: <code class="docutils literal notranslate"><span class="pre">point</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeries</span></code>, <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">trajectory</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeriesProfile</span></code>, <code class="docutils literal notranslate"><span class="pre">trajectoryProfile</span></code>.</p></li>
+</ul>
+<p><a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html#attribute-appendix">Appendix A</a> of the CF Conventions provides an overview of all attributes defined by this metadata standard, you can find more information about attributes in the documentation. It should be noted that <strong>including attributes that are not specified in the CF Conventions does not make a dataset incompatible with the CF Conventions</strong>.</p>
+</section>
+</section>
+<section id="file-structure-recommendations-for-diverse-data-types">
+<h2>2. File Structure Recommendations for Diverse Data Types<a class="headerlink" href="#file-structure-recommendations-for-diverse-data-types" title="Link to this heading">#</a></h2>
+<p>Data in a netCDF file can be presented in two major forms, <strong>gridded</strong> or as <strong>discrete geometry samples (DSGs)</strong>. Though the interpretation of gridded data may vary depending on its coordinate system, the ways how gridded data are arranged in netCDF files are quite similar. The example that we presented above has a representative structure of gridded data, where multiple layers of grids representing different variables (coordinate variable, auxiliary coordinate variable, data variable) are overlaid upon each other, thus overlaid cells share same coordinates. Data like images captured by earth observation satellites, climate model outputs are usually gridded data. However, the arrangement of DSG data in netCDFs can be very diverse, depending on the type as well as the length of DSG features.</p>
+<p>In the CF Conventions, DSG features are divided into the following types:</p>
+<ul class="simple">
+<li><p><strong>Point</strong>: Unconnected points / stations, each point / station only contains a single element (e.g. Earthquake data, Lightning data).</p></li>
+<li><p><strong>Time Series</strong>: Data are taken over periods of time for a single station (e.g. Weather station data, Fixed buoys).</p></li>
+<li><p><strong>Profile</strong>: Data are taken along a vertical line at a single station (e.g. Atmospheric profiles from satellites).</p></li>
+<li><p><strong>Trajectory</strong>: Data are taken along a spatial path at different times, each trajectory contains a set of connected points (e.g. Cruise data, drifting buoys).</p></li>
+<li><p>Combined DSG:</p>
+<ul>
+<li><p><strong>Timeseries of Profiles</strong>: Profiles taken over periods of time for a fixed station.</p></li>
+<li><p><strong>Trajectory of Profiles</strong>: A collection of profiles along a trajectory (e.g. Ship soundings).</p></li>
+</ul>
+</li>
+</ul>
+<p>The <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html#appendix-examples-discrete-geometries">Appendix H</a> of the CF Conventions provides concrete recommendations on the data arrangement of various DSG data. By following the roadmap shown below, you could find the recommended netCDF file structure for the specific type of DSG data you have. In <a class="reference internal" href="PART4_DSG_timeSeries.html"><span class="std std-doc">chapter 4</span></a>, we will walk you through the procedure of creating a netCDF file for every type of time series data as suggested by the CF Conventions. In <a class="reference internal" href="PART5_DSG_profile.html"><span class="std std-doc">chapter 5</span></a>, <a class="reference internal" href="PART6_DSG_trajectory.html"><span class="std std-doc">chapter 6</span></a> and <a class="reference internal" href="PART7_combined_DSG.html"><span class="std std-doc">chapter 7</span></a>, we have prepared examples to elaborate on this procedure for other types of DSG data (profile, trajectory, complex DSG), along with exercises with sample solutions so that you can practice creating standard netCDFs file on your own.</p>
+<p><img alt="img" src="https://live.staticflickr.com/65535/53876343350_2425d3064b_o_d.jpg" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "venvnetcdf"
+        },
+        kernelOptions: {
+            name: "venvnetcdf",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'venvnetcdf'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="PART1_Intro_netCDF.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter-1: An Introduction to netCDF</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PART3_Grid_netCDF_Xarray.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter-3: Create netCDF for gridded data with Xarray</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-adopt-a-metadata-standard">Why should we adopt a metadata standard?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-attributes-in-netcdf">1. Standard Attributes in netCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-attributes">1.1. Variable Attributes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-attributes">1.2. Global Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure-recommendations-for-diverse-data-types">2. File Structure Recommendations for Diverse Data Types</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Remon Sadikni, Kemeng Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
