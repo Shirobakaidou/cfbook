@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Create Publishable NetCDF Data
-author: OOO
+author: Remon Sadikni, Kemeng Liu
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
