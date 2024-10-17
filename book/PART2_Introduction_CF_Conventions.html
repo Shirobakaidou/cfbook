@@ -106,8 +106,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -141,7 +141,7 @@
 
   
 
-<a class="navbar-brand logo" href="PART0_intro.html">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -170,14 +170,6 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="PART0_intro.html">
-                    Welcome to the Course!
-                </a>
-            </li>
-        </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="PART1_Intro_netCDF.html">Chapter-1: An Introduction to netCDF</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter-2: An Introduction to the CF Conventions</a></li>
@@ -186,6 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="PART5_DSG_profile.html">Chapter-5: Create netCDF for profile Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PART6_DSG_trajectory.html">Chapter-6: Create netCDF for trajectory Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PART7_combined_DSG.html">Chapter-7: Create netCDF for compound data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
     </div>
@@ -229,50 +222,18 @@
 <div class="article-header-buttons">
 
 
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
+<a href="https://github.com/Shirobakaidou/cfbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
    title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbook/PART2_Introduction_CF_Conventions.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
 
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
 </a>
-</li>
-      
-  </ul>
-</div>
 
 
 
@@ -404,7 +365,7 @@ document.write(`
 <section id="why-should-we-adopt-a-metadata-standard">
 <h2>Why should we adopt a metadata standard?<a class="headerlink" href="#why-should-we-adopt-a-metadata-standard" title="Link to this heading">#</a></h2>
 <p>In the earth system science (ESS) community, huge amount of data are generated, exchanged, and consumed. It is often a time consuming task for researchers to discover from an enormous pool of data the right dataset they want. Meanwhile, it is also challenging for data providers to bring their data products to users. To meet this challenge in today’s research ecosystem, it is a highly recommended practice to enrich and standardize metadata of research datasets. By doing this, you’re making your data more findable, interoperable, and reusable by other stakeholders in the community, thus contributing to the achievement of the FAIR principle of open science in a broader sense.</p>
-<p>A <strong>metadata standard</strong>, by definition, is a set of rules or guidelines that defines how metadata should be structured, described, and managed. It specifies the elements or attributes to be included, the semantics of those elements, and often the syntax or format in which the metadata should be encoded.</p>
+<p>A <strong>metadata standard</strong> is a set of rules or guidelines that defines how metadata should be structured, described, and managed. It specifies the elements or attributes to be included, the semantics of those elements, and often the syntax or format in which the metadata should be encoded.</p>
 <p>The CF Conventions is becoming a widely adopted metadata standard for netCDF data format. It is the successor of the COARDS Conventions, and is characterised by its flexibility and campatibility with other metadata standards. Broadly speaking, the CF Conventions does two important things:</p>
 <ol class="arabic simple">
 <li><p>Providing standards for attributes: What kind of attributes should be included in netCDFs?</p></li>
@@ -413,7 +374,7 @@ document.write(`
 </section>
 <section id="standard-attributes-in-netcdf">
 <h2>1. Standard Attributes in netCDF<a class="headerlink" href="#standard-attributes-in-netcdf" title="Link to this heading">#</a></h2>
-<p>According to the <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html">CF Conventions</a>(by the time of making this chapter, the most recent version of the CF Conventions is 1.11), some attributes are required while the others are optional. However, it is certainly recommended to enrich the attributes of each variable, as well as the entire dataset, as good as possible. Here, we will use the same <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/examples/tos_O1_2001-2002.nc">dataset</a> of sea surface temperature as an example like in the previous chapter.</p>
+<p>According to the CF Conventions<span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="Brian Eaton, Jonathan Gregory, Bob Drach, Karl Taylor, Steve Hankin, John Caron, Rich Signell, Phil Bentley, Greg Rappa, Heinke Höck, Alison Pamment, Martin Juckes, Martin Raspaud, Randy Horne, Timothy Whiteaker, David Blodgett, Charlie Zender, Daniel Lee, David Hassell, Alan D Snow, Tobias Kölling, Dave Allured, Aleksandar Jelenak, Anders Meier Sørensen, Lucile Gaultier, Herlédan Sylvain, Fernando Manzano, Lars B\a rring, Christopher Barker, and Sadie Bartholomew. NetCDF Climate and Forecast (CF) Metadata Conventions v1.11. December 2023. URL: https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html (visited on 2023-12-04).">1</a>]</span> (by the time of making this chapter, the most recent version of the CF Conventions is 1.11), some attributes are required while the others are optional. However, it is certainly recommended to enrich the attributes of each variable, as well as the entire dataset, as good as possible. Here, we will use the same <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/examples/tos_O1_2001-2002.nc">dataset</a> of sea surface temperature as an example like in the previous chapter.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xarray.Dataset {
@@ -658,7 +619,7 @@ variables:
   <div class="footer-item">
     
 <p class="component-author">
-By Remon Sadikni, Kemeng Liu
+By Kemeng Liu & Remon Sadikni
 </p>
 
   </div>
@@ -668,7 +629,7 @@ By Remon Sadikni, Kemeng Liu
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>
