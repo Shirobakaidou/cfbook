@@ -8,10 +8,10 @@ In this course, we will introduce a widely adopted metadata standard, the CF Con
 
 This course is composed of the following chapters:
 
-1. [An Introduction to netCDF](PART1_Intro_netCDF.ipynb)
-2. [An Introduction to the CF Conventions](PART2_Introduction_CF_Conventions.ipynb)
-3. [Create netCDF for gridded data with Xarray](PART3_Grid_netCDF_Xarray.ipynb)
-4. [Create netCDF for time series data](PART4_DSG_timeSeries.ipynb)
-5. [Create netCDF for profile data](PART5_DSG_profile.ipynb)
-6. [Create netCDF for trajectory data](PART6_DSG_trajectory.ipynb)
-7. [Create netCDF for compound data](PART7_combined_DSG.ipynb)
+1. [An Introduction to netCDF](book/PART1_Intro_netCDF.ipynb)
+2. [An Introduction to the CF Conventions](book/PART2_Introduction_CF_Conventions.ipynb)
+3. [Create netCDF for gridded data with Xarray](book/PART3_Grid_netCDF_Xarray.ipynb)
+4. [Create netCDF for time series data](book/PART4_DSG_timeSeries.ipynb)
+5. [Create netCDF for profile data](book/PART5_DSG_profile.ipynb)
+6. [Create netCDF for trajectory data](book/PART6_DSG_trajectory.ipynb)
+7. [Create netCDF for compound data](book/PART7_combined_DSG.ipynb)

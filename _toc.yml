@@ -2,12 +2,14 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: book/PART0_intro
+root: index
 chapters:
-- file: book/PART1_Intro_netCDF
-- file: book/PART2_Introduction_CF_Conventions
-- file: book/PART3_Grid_netCDF_Xarray
-- file: book/PART4_DSG_timeSeries
-- file: book/PART5_DSG_profile
-- file: book/PART6_DSG_trajectory
-- file: book/PART7_combined_DSG
+  - file: book/PART1_Intro_netCDF
+  - file: book/PART2_Introduction_CF_Conventions
+  - file: book/PART3_Grid_netCDF_Xarray
+  - file: book/PART4_DSG_timeSeries
+  - file: book/PART5_DSG_profile
+  - file: book/PART6_DSG_trajectory
+  - file: book/PART7_combined_DSG
+  - file: book/bibliography
+
