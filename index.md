@@ -1,17 +1,12 @@
-# Welcome to the Course!
+# How to Create Publishable NetCDF Data
 
-Our course is about creating publishable netCDF files.
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://bioimagebook.github.io)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-NetCDF is one of the most widely used scientific data formats in the earth system science (ESS). For scientists or anybody who want to publish their research data in netCDF format and make their datasets more interoperable and reusable, this course is worth going through.
+This tutorial tries to provide a pragmatic guide on creating netCDF files compliant with the CF Conventions.
 
-In this course, we will introduce a widely adopted metadata standard, the CF Conventions, that provides guidelines and recommendations on constructing standard netCDF files from variable data. It was our goal to equip you with the ability to use the CF Conventions as a tool on your own when creating netCDF files. Thus, we prepared rich examples and hands-on exercises along with the theory. After this course, we believe that you will be able to interpret the CF Conventions' documentation, as well as build your first CF compliant netCDF file. Although not every aspect of the metadata standard was covered in this course, you can usually find answers to your questions in the [documentation](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html) of the CF Conventions.
+For researchers who want to publish your datasets in netCDF format, or make your netCDF datasets more findable, interoperable, and reusable in your community, we hope this tutorial can be helpful to you.
 
-This course is composed of the following chapters:
+The core content is based on a widely adopted metadata standard, the CF Conventions, that provides guidelines and recommendations on constructing standard netCDF files from variable data. Our goal is to equip you with the ability to use the documentation of the CF Conventions as a tool when creating netCDF files. Thus, we prepared rich examples and hands-on exercises along with the theory. It is of course not a "must" to examine all the examples and exercises in order to work with the CF Conventions, please feel free to take a closer look into the chapters that suit best to your needs. But if you are a newcomer to netCDF data, we'd like to recommend you start from the beginning, at least finish reading the first two chapters before jumping to a later chapter of your interest.
 
-1. [An Introduction to netCDF](book/PART1_Intro_netCDF.ipynb)
-2. [An Introduction to the CF Conventions](book/PART2_Introduction_CF_Conventions.ipynb)
-3. [Create netCDF for gridded data with Xarray](book/PART3_Grid_netCDF_Xarray.ipynb)
-4. [Create netCDF for time series data](book/PART4_DSG_timeSeries.ipynb)
-5. [Create netCDF for profile data](book/PART5_DSG_profile.ipynb)
-6. [Create netCDF for trajectory data](book/PART6_DSG_trajectory.ipynb)
-7. [Create netCDF for compound data](book/PART7_combined_DSG.ipynb)
+After this tutorial, we hope you are able to use the CF Conventions as a data curation tool, and creat publishable netCDF data on your own!
